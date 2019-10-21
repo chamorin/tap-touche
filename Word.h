@@ -37,6 +37,8 @@ public:
     void setPos(float posX, float posY);
     void setColor(sf::Color color);
 
+    float getPosX();
+
     void draw();
     void update();
 

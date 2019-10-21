@@ -1,7 +1,4 @@
 #include "Word.h"
-#include <iostream>
-
-using namespace std;
 
 Word::Word(sf::RenderWindow &window) : _window(window)
 {
@@ -60,6 +57,11 @@ void Word::setColor(sf::Color color)
 {
     _color = color;
     _text.setFillColor(color);
+}
+
+float Word::getPosX()
+{
+    return _posX;
 }
 
 void Word::draw()
