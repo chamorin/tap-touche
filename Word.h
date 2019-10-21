@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -13,10 +14,12 @@ protected:
     int _difficulty;
     float _posX;
     float _posY;
-    bool _isComplete;
     int _remainingChar;
+    bool _isComplete;
+    bool _isFirst;
 
     sf::RenderWindow &_window;
+    vector<Word> &_wVec;
 
     sf::Text _text;
     sf::Color _color;
@@ -39,6 +42,8 @@ public:
     void move();
     void checkState();
     void changeCharColor();
+
+    void checkKeyPressed();
 };
 
 #endif

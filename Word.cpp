@@ -72,3 +72,12 @@ void Word::checkState()
 void Word::changeCharColor()
 {
 }
+
+void Word::checkKeyPressed()
+{
+    if (_isFirst)
+    {
+        // Check wich key is pressed and check if word contains the key letter
+        // Also call function changeCharColor on the entered letter
+    }
+}
