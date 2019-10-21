@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "Word.h"
 
 using namespace std;
 
@@ -8,19 +9,7 @@ int main()
 	const int SCREEN_HEIGHT = 400;
 
 	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Tap-Touche");
-	sf::Font font;
-	sf::Text text;
-
-	font.loadFromFile("minecraft.ttf");
-	text.setFont(font);
-	text.setString("Hello World");
-	text.setCharacterSize(24);
-
-	// set the color
-	text.setFillColor(sf::Color::Red);
-
-	// set the text style
-	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+	Word word(window, "ALLO", 1, 0.0f, 0.0f);
 
 	float posX = 0.0f;
 	while (window.isOpen())
@@ -32,15 +21,16 @@ int main()
 				window.close();
 		}
 
-		text.setPosition(posX, 0.0f);
+		word.setPosX(posX);
 		++posX;
 
-		if (posX >= SCREEN_WIDTH) {
+		if (posX >= SCREEN_WIDTH)
+		{
 			posX = 0.0f;
 		}
 
 		window.clear();
-		window.draw(text);
+		word.draw();
 		window.display();
 	}
 
