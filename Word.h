@@ -14,12 +14,12 @@ protected:
     int _difficulty;
     float _posX;
     float _posY;
-    int _remainingChar;
+    int _currentCharPos;
     bool _isComplete;
     bool _isFirst;
 
     sf::RenderWindow &_window;
-    vector<Word> &_wVec;
+    //vector<Word> &_wVec;
 
     sf::Text _text;
     sf::Color _color;
@@ -34,6 +34,7 @@ public:
     void setDifficulty(int difficulty);
     void setPosX(float posX);
     void setPosY(float posY);
+    void setPos(float posX, float posY);
     void setColor(sf::Color color);
 
     void draw();

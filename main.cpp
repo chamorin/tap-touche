@@ -9,7 +9,7 @@ int main()
 	const int SCREEN_HEIGHT = 400;
 
 	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Tap-Touche");
-	Word word(window, "ALLO", 1, 0.0f, 0.0f);
+	Word word(window, "allo", 1, 0.0f, 0.0f);
 
 	float posX = 0.0f;
 	while (window.isOpen())
@@ -31,6 +31,7 @@ int main()
 
 		window.clear();
 		word.draw();
+		word.changeCharColor();
 		window.display();
 	}
 
