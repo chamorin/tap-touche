@@ -13,8 +13,7 @@ Word::Word(sf::RenderWindow &window, string str, int difficulty, float posX, flo
     _text = sf::Text();
     setStr(str);
     setDifficulty(difficulty);
-    setPosX(0.0f);
-    setPosY(0.0f);
+    setPos(posX, posY);
     setColor(sf::Color::Blue);
     _currentCharPos = 0;
 
@@ -71,6 +70,9 @@ void Word::draw()
 
 void Word::update()
 {
+    checkState();
+    draw();
+    changeCharColor();
 }
 
 void Word::move()
@@ -79,32 +81,37 @@ void Word::move()
 
 void Word::checkState()
 {
+    if (_isComplete)
+    {
+        setStr("DONE");
+    }
 }
 
 void Word::changeCharColor()
 {
-    sf::Text tempText = sf::Text();
-    ;
-    string tempStr;
-    tempText.setFont(_font);
-    tempText.setCharacterSize(24);
-    tempText.setPosition(_posX, _posY);
-    tempText.setFillColor(sf::Color::Yellow);
-
-    for (int i = 0; i < _currentCharPos; ++i)
+    if (!_isComplete)
     {
-        tempStr += _str[i];
-    }
+        sf::Text tempText = sf::Text();
+        string tempStr;
+        tempText.setFont(_font);
+        tempText.setCharacterSize(24);
+        tempText.setPosition(_posX, _posY);
+        tempText.setFillColor(sf::Color::Yellow);
 
-    tempText.setString(tempStr);
-    _window.draw(tempText);
+        for (int i = 0; i < _currentCharPos; ++i)
+        {
+            tempStr += _str[i];
+        }
+
+        tempText.setString(tempStr);
+        _window.draw(tempText);
+    }
 }
 
 void Word::checkKeyPressed()
 {
-    if (true)
+    if (true) // replace with _isFirst
     {
-        // Check wich key is pressed and check if word contains the key letter
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         {
             if (_str[_currentCharPos] == 'a')
@@ -316,6 +323,6 @@ void Word::checkKeyPressed()
 
     if (_currentCharPos >= _str.size())
     {
-        setStr("FINI");
+        _isComplete = true;
     }
 }
