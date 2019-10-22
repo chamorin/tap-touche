@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include <time.h>
+#include <iostream>
 #include "Word.h"
 
 using namespace std;
@@ -7,6 +9,7 @@ int main()
 {
 	const int SCREEN_WIDTH = 600;
 	const int SCREEN_HEIGHT = 400;
+	srand(time(NULL));
 
 	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Tap-Touche");
 	vector<Word> wVec;
@@ -26,17 +29,17 @@ int main()
 		windowSize = window.getSize();
 
 		float ScaleX = (float)windowSize.x / textureSize.x;
-		float ScaleY = (float)windowSize.y / textureSize.y; 
+		float ScaleY = (float)windowSize.y / textureSize.y;
 
 		background.setTexture(backgroundTexture);
-		background.setScale(ScaleX, ScaleY); 
+		background.setScale(ScaleX, ScaleY);
 	}
 	float randPosX;
 	float randPosY;
 
 	for (int i = 0; i < 4; ++i)
 	{
-		randPosX = (float)(rand() % (SCREEN_WIDTH / 3) + 1);
+		randPosX = (float)(rand() % 50 + 1);
 		randPosY = (float)(rand() % SCREEN_HEIGHT + 1);
 		Word word(window, "charlobino", 1, randPosX, randPosY);
 		wVec.push_back(word);
@@ -60,9 +63,10 @@ int main()
 			wVec[i].setPosX(wVec[i].getPosX() + 1.0f);
 			if (wVec[i].getPosX() >= SCREEN_WIDTH)
 			{
-				randPosX = (float)(rand() % (SCREEN_WIDTH / 3) + 1);
+				randPosX = (float)(rand() % 50 + 1);
 				randPosY = (float)(rand() % SCREEN_HEIGHT + 1);
 				wVec[i].setPos(randPosX, randPosY);
+				cout << randPosY << endl;
 			}
 			wVec[i].update();
 		}
