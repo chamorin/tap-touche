@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include "Word.h"
 
 using namespace std;
@@ -23,6 +22,8 @@ int main()
 		wVec.push_back(word);
 	}
 
+	Word word(window, "", 1, 0.0f, 0.0f); // ??????
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -35,11 +36,12 @@ int main()
 		window.clear();
 		for (int i = 0; i < wVec.size(); ++i)
 		{
-			cout << wVec[i].getPosX() << endl;
 			wVec[i].setPosX(wVec[i].getPosX() + 1.0f);
 			if (wVec[i].getPosX() >= SCREEN_WIDTH)
 			{
-				wVec[i].setPosX((float)(rand() % (SCREEN_WIDTH / 3) + 1));
+				randPosX = (float)(rand() % (SCREEN_WIDTH / 3) + 1);
+				randPosY = (float)(rand() % SCREEN_HEIGHT + 1);
+				wVec[i].setPos(randPosX, randPosY);
 			}
 			wVec[i].update();
 		}
