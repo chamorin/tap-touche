@@ -11,7 +11,7 @@ Word::Word(sf::RenderWindow &window, string str, int difficulty, float posX, flo
     setStr(str);
     setDifficulty(difficulty);
     setPos(posX, posY);
-    setColor(sf::Color::Blue);
+    setColor(sf::Color::Yellow);
     _currentCharPos = 0;
 
     _font.loadFromFile("minecraft.ttf");
@@ -98,7 +98,7 @@ void Word::changeCharColor()
         tempText.setFont(_font);
         tempText.setCharacterSize(24);
         tempText.setPosition(_posX, _posY);
-        tempText.setFillColor(sf::Color::Yellow);
+        tempText.setFillColor(sf::Color::Green);
 
         for (int i = 0; i < _currentCharPos; ++i)
         {

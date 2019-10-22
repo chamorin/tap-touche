@@ -11,6 +11,26 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Tap-Touche");
 	vector<Word> wVec;
 
+	sf::Texture BackgroundTexture;
+	sf::Sprite background;
+	sf::Vector2u TextureSize;
+	sf::Vector2u WindowSize;
+
+	if (!BackgroundTexture.loadFromFile("background.png"))
+	{
+		return -1;
+	}
+	else
+	{
+		TextureSize = BackgroundTexture.getSize();
+		WindowSize = window.getSize();
+
+		float ScaleX = (float)WindowSize.x / TextureSize.x;
+		float ScaleY = (float)WindowSize.y / TextureSize.y; 
+
+		background.setTexture(BackgroundTexture);
+		background.setScale(ScaleX, ScaleY); 
+	}
 	float randPosX;
 	float randPosY;
 
@@ -34,6 +54,7 @@ int main()
 		}
 
 		window.clear();
+		window.draw(background);
 		for (int i = 0; i < wVec.size(); ++i)
 		{
 			wVec[i].setPosX(wVec[i].getPosX() + 1.0f);
