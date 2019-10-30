@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <time.h>
 #include "Word.h"
 
 using namespace std;

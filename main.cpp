@@ -11,50 +11,35 @@ int main()
 	const int SCREEN_WIDTH = 600;
 	const int SCREEN_HEIGHT = 400;
 	const string backgroundPath = "background.png";
-
+	srand(time(NULL));
+	
 	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Tap-Touche");
 
 	// Load background image
 	sf::Texture backgroundTexture;
-    sf::Sprite background;
-    sf::Vector2u textureSize;
-    sf::Vector2u windowSize;
+	sf::Sprite background;
+	sf::Vector2u textureSize;
+	sf::Vector2u windowSize;
 
-    if (!backgroundTexture.loadFromFile(backgroundPath))
-    {
-        cout << "Error: Unable to load background image " << endl;
-        exit(1);
-    }
-    else
-    {
-        textureSize = backgroundTexture.getSize();
-        windowSize = window.getSize();
+	if (!backgroundTexture.loadFromFile(backgroundPath))
+	{
+		cout << "Error: Unable to load background image " << endl;
+		exit(1);
+	}
+	else
+	{
+		textureSize = backgroundTexture.getSize();
+		windowSize = window.getSize();
 
-        float ScaleX = (float)windowSize.x / textureSize.x;
-        float ScaleY = (float)windowSize.y / textureSize.y;
+		float ScaleX = (float)windowSize.x / textureSize.x;
+		float ScaleY = (float)windowSize.y / textureSize.y;
 
-        background.setTexture(backgroundTexture);
-        background.setScale(ScaleX, ScaleY);
-    }
-
+		background.setTexture(backgroundTexture);
+		background.setScale(ScaleX, ScaleY);
+	}
 
 	Game game(window);
-	vector<Word> wVec;
-
-	// float randPosX;
-	// float randPosY;
-
-	// for (int i = 0; i < 4; ++i)
-	// {
-	// 	randPosX = (float)(rand() % 50 + 1);
-	// 	randPosY = (float)(rand() % SCREEN_HEIGHT + 1);
-	// 	Word word(window, "charlobino", 1, randPosX, randPosY);
-	// 	wVec.push_back(word);
-	// }
-
 	game.init();
-
-	//Word word(window, "", 1, 0.0f, 0.0f); // ??????
 
 	while (window.isOpen())
 	{
@@ -67,7 +52,8 @@ int main()
 
 		window.clear();
 		window.draw(background);
-		//game.update();
+
+		game.update();
 
 		window.display();
 	}
