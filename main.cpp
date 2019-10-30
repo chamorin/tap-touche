@@ -2,6 +2,7 @@
 #include <time.h>
 #include <iostream>
 #include "Word.h"
+#include "Game.h"
 
 using namespace std;
 
@@ -9,43 +10,51 @@ int main()
 {
 	const int SCREEN_WIDTH = 600;
 	const int SCREEN_HEIGHT = 400;
-	srand(time(NULL));
+	const string backgroundPath = "background.png";
 
 	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Tap-Touche");
+
+	// Load background image
+	sf::Texture backgroundTexture;
+    sf::Sprite background;
+    sf::Vector2u textureSize;
+    sf::Vector2u windowSize;
+
+    if (!backgroundTexture.loadFromFile(backgroundPath))
+    {
+        cout << "Error: Unable to load background image " << endl;
+        exit(1);
+    }
+    else
+    {
+        textureSize = backgroundTexture.getSize();
+        windowSize = window.getSize();
+
+        float ScaleX = (float)windowSize.x / textureSize.x;
+        float ScaleY = (float)windowSize.y / textureSize.y;
+
+        background.setTexture(backgroundTexture);
+        background.setScale(ScaleX, ScaleY);
+    }
+
+
+	Game game(window);
 	vector<Word> wVec;
 
-	sf::Texture backgroundTexture;
-	sf::Sprite background;
-	sf::Vector2u textureSize;
-	sf::Vector2u windowSize;
+	// float randPosX;
+	// float randPosY;
 
-	if (!backgroundTexture.loadFromFile("background.png"))
-	{
-		return -1;
-	}
-	else
-	{
-		textureSize = backgroundTexture.getSize();
-		windowSize = window.getSize();
+	// for (int i = 0; i < 4; ++i)
+	// {
+	// 	randPosX = (float)(rand() % 50 + 1);
+	// 	randPosY = (float)(rand() % SCREEN_HEIGHT + 1);
+	// 	Word word(window, "charlobino", 1, randPosX, randPosY);
+	// 	wVec.push_back(word);
+	// }
 
-		float ScaleX = (float)windowSize.x / textureSize.x;
-		float ScaleY = (float)windowSize.y / textureSize.y;
+	game.init();
 
-		background.setTexture(backgroundTexture);
-		background.setScale(ScaleX, ScaleY);
-	}
-	float randPosX;
-	float randPosY;
-
-	for (int i = 0; i < 4; ++i)
-	{
-		randPosX = (float)(rand() % 50 + 1);
-		randPosY = (float)(rand() % SCREEN_HEIGHT + 1);
-		Word word(window, "charlobino", 1, randPosX, randPosY);
-		wVec.push_back(word);
-	}
-
-	Word word(window, "", 1, 0.0f, 0.0f); // ??????
+	//Word word(window, "", 1, 0.0f, 0.0f); // ??????
 
 	while (window.isOpen())
 	{
@@ -58,18 +67,8 @@ int main()
 
 		window.clear();
 		window.draw(background);
-		for (int i = 0; i < wVec.size(); ++i)
-		{
-			wVec[i].setPosX(wVec[i].getPosX() + 1.0f);
-			if (wVec[i].getPosX() >= SCREEN_WIDTH)
-			{
-				randPosX = (float)(rand() % 50 + 1);
-				randPosY = (float)(rand() % SCREEN_HEIGHT + 1);
-				wVec[i].setPos(randPosX, randPosY);
-				cout << randPosY << endl;
-			}
-			wVec[i].update();
-		}
+		//game.update();
+
 		window.display();
 	}
 
